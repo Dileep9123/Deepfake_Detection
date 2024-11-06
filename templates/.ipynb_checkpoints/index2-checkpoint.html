@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <title>Fake Image Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            color: #333;
+            margin: 10px 0;
+        }
+
+        img {
+            max-width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fake Image Detection</h1>
+    <form method="POST" enctype="multipart/form-data" action="/">
+        <input type="file" name="file">
+        <br>
+        <input type="submit" value="Upload Image">
+    </form>
+    <br>
+    {% if result %}
+        <p>The image is classified as: {{ result }}</p>
+        <img src="{{url_for('static', filename='uploads/' + image_path)}}" alt="Uploaded Image">
+    {% endif %}
+</body>
+</html>

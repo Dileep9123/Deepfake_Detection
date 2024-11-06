@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Deepdetect</title>
+    <!--GOOGLE FONT-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <!--BOOTSTRAP LINK-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1 align="center">
+      Deepdetect : Unmasking the fake
+    </h1>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Deepdetect</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active nav-list" aria-current="page" href="#"
+              >Home</a
+            >
+            <a class="nav-link active nav-list" href="#">AboutUs</a>
+            <a class="nav-link active nav-list" href="info.html">Info</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <h2>"Upload a Photo, Unmask the Truth!"</h2>
+    <div class="container">
+      <input type="file" id="fileInput" accept="image/*" />
+      <button class="box" id="analyzeButton">Analyze</button>
+      <div id="result" class="box">
+        <span id="resultText">Waiting for analysis...</span>
+      </div>
+      <img
+        class="box"
+        id="logoImage"
+        src=""
+        alt="Uploaded Image"
+        width="450px"
+        height="450px"
+      />
+    </div>
+    <script>
+      document
+        .getElementById("analyzeButton")
+        .addEventListener("click", function () {
+          const fileInput = document.getElementById("fileInput");
+          const logoImage = document.getElementById("logoImage");
+          const resultText = document.getElementById("resultText");
+
+          const file = fileInput.files[0];
+          if (file) {
+            const objectURL = URL.createObjectURL(file);
+            logoImage.src = objectURL;
+            resultText.textContent = "Analyzing...";
+
+            // Add code to send the image to your deep learning model for analysis here
+            // You can update the resultText with the detection result
+          }
+        });
+    </script>
+    {% if result %}
+    <p>The image is classified as: {{ result }}</p>
+    <img src="{{ image_path }}" alt="Uploaded Image" />
+
+    {% endif %}
+  </body>
+</html>
+

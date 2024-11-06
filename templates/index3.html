@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Fake Image Detection</title>
+    <!--BOOTSTRAP LINK-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="index.css" />
+      <style>
+          .navbar-nav {
+  margin: 0px 65%;
+}
+.navbar-brand {
+  font-size: 2.15rem;
+  margin-left: 30px;
+}
+.nav-list {
+  margin: 0px 20%;
+}
+
+.container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  text-align: center;
+}
+.box {
+  margin-bottom: 10px;
+}
+.card {
+  margin: 10px 30px;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+h1 {
+  margin: 20px;
+}
+h2 {
+  margin: 30px;
+  text-align: center;
+}
+h3 {
+  margin: 20px 40px;
+}
+
+
+      </style>
+  </head>
+  <body>
+    <h1 align="center">
+      Fake Image Detection : Unmasking the fake
+    </h1>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+       
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+           
+           
+          </div>
+        </div>
+      </div>
+    </nav>
+    <h2>"Upload a Photo, Unmask the Truth!"</h2>
+    <div class="container">
+         <form method="POST" enctype="multipart/form-data" action="/">
+        <input type="file" name="file">
+        <br>
+        <input type="submit" value="Upload Image">
+    </form>
+    <br>
+    {% if result %}
+        <p>The image is classified as: {{ result }}</p>
+        <img src="{{url_for('static', filename='uploads/' + image_path)}}" alt="Uploaded Image">
+        
+
+    {% endif %}
+     
+    </div>
+    <script>
+      document
+        .getElementById("analyzeButton")
+        .addEventListener("click", function () {
+          const fileInput = document.getElementById("fileInput");
+          const logoImage = document.getElementById("logoImage");
+          const resultText = document.getElementById("resultText");
+
+          const file = fileInput.files[0];
+          if (file) {
+            const objectURL = URL.createObjectURL(file);
+            logoImage.src = objectURL;
+            resultText.textContent = "Analyzing...";
+
+            // Add code to send the image to your deep learning model for analysis here
+            // You can update the resultText with the detection result
+          }
+        });
+    </script>
+    
+   
+  </body>
+</html>
+

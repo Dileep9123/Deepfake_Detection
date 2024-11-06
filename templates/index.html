@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+    <title> Fake Image Detection</title>
+</head>
+<body>
+    <h1>Fake Image Detection</h1>
+    <form method="POST" enctype="multipart/form-data" action="/">
+        <input type="file" name="file">
+        <input type="submit" value="Upload Image">
+    </form>
+    <br>
+    {% if result %}
+        <p>The image is classified as: {{ result }}</p>
+    {% endif %}
+</body>
+</html>
