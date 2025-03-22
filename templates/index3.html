@@ -1,133 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Fake Image Detection</title>
-    <!--BOOTSTRAP LINK-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="index.css" />
-      <style>
-          .navbar-nav {
-  margin: 0px 65%;
-}
-.navbar-brand {
-  font-size: 2.15rem;
-  margin-left: 30px;
-}
-.nav-list {
-  margin: 0px 20%;
-}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Fake Image Detection</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
 
-.container {
-  max-width: 700px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 3px solid rgb(0, 0, 0);
-  border-radius: 5px;
-  text-align: center;
-}
-.box {
-  margin-bottom: 10px;
-}
-.card {
-  margin: 10px 30px;
-}
+    /* Navbar */
+    .navbar {
+      background-color: #2c3e50;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-.column {
-  float: left;
-  width: 33.33%;
-}
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-h1 {
-  margin: 20px;
-}
-h2 {
-  margin: 30px;
-  text-align: center;
-}
-h3 {
-  margin: 20px 40px;
-}
+    /* Main Content */
+    h1 {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 2.5rem;
+      color: #34495e;
+    }
 
+    h2 {
+      text-align: center;
+      margin: 1rem 0 2rem;
+      font-size: 1.8rem;
+      color: #7f8c8d;
+    }
 
-      </style>
-  </head>
-  <body>
-    <h1 align="center">
-      Fake Image Detection : Unmasking the fake
-    </h1>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-       
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-           
-           
-          </div>
-        </div>
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .mb-3 {
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="file"] {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: block;
+      margin: 0 auto;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    .result-text {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #16a085;
+      text-align: center;
+    }
+
+    .img-preview {
+      display: block;
+      max-width: 100%;
+      margin: 1.5rem auto;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a  href="#">Fake Image Detection</a>
+  </nav>
+
+  <!-- Main Content -->
+  <h1 style="text-align: center;">Unmasking the Fake</h1>
+  <h2>"Upload a Photo, Unmask the Truth!"</h2>
+
+  <div class="container">
+    <form method="POST" enctype="multipart/form-data" action="/">
+      <div class="mb-3">
+        <input type="file" name="file" required />
       </div>
-    </nav>
-    <h2>"Upload a Photo, Unmask the Truth!"</h2>
-    <div class="container">
-         <form method="POST" enctype="multipart/form-data" action="/">
-        <input type="file" name="file">
-        <br>
-        <input type="submit" value="Upload Image">
+      <input type="submit" value="Upload Image" />
     </form>
-    <br>
+
     {% if result %}
-        <p>The image is classified as: {{ result }}</p>
-        <img src="{{url_for('static', filename='uploads/' + image_path)}}" alt="Uploaded Image">
-        
-
+      <p class="result-text">The image is classified as: {{ result }}</p>
+      <img
+        src="{{url_for('static', filename='uploads/' + image_path)}}"
+        alt="Uploaded Image"
+        class="img-preview"
+      />
     {% endif %}
-     
-    </div>
-    <script>
-      document
-        .getElementById("analyzeButton")
-        .addEventListener("click", function () {
-          const fileInput = document.getElementById("fileInput");
-          const logoImage = document.getElementById("logoImage");
-          const resultText = document.getElementById("resultText");
-
-          const file = fileInput.files[0];
-          if (file) {
-            const objectURL = URL.createObjectURL(file);
-            logoImage.src = objectURL;
-            resultText.textContent = "Analyzing...";
-
-            // Add code to send the image to your deep learning model for analysis here
-            // You can update the resultText with the detection result
-          }
-        });
-    </script>
-    
-   
-  </body>
+  </div>
+</body>
 </html>
-
